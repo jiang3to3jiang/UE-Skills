@@ -1,6 +1,6 @@
 # ue-plugin-bootstrap
 
-一个 Cowork / Claude skill,用来**手把手**带你从零搭一个 Unreal Engine 5.3 C++ 插件,联动 Visual Studio 和蓝图。
+一个 Cowork / Claude skill,用来**手把手**带你从零搭一个 Unreal Engine C++ 插件,联动 Visual Studio 和蓝图。**支持 UE 5.0 / 5.1 / 5.2 / 5.3 / 5.4 / 5.5**(skill 第一步会询问你的版本并自动适配)。
 
 ## 这个 skill 解决什么问题
 
@@ -58,9 +58,11 @@ ue-plugin-bootstrap-skill/
 
 ## 适用条件
 
-- Unreal Engine **5.3**(其他版本未测试,5.0-5.4 大概率也能用,菜单位置可能略有差异)
-- Windows 10/11
-- Visual Studio 2019 或 2022(推荐 2022)
+- Unreal Engine **5.0 ~ 5.5**(已覆盖主流 5.x 版本,skill 内部按你选的版本适配)
+- Windows 10 / 11
+- Visual Studio 2019 或 2022
+  - UE 5.4 / 5.5:**强烈推荐 VS 2022**(VS 2019 已不再官方支持)
+  - UE 5.0 ~ 5.3:VS 2019 / VS 2022 都行
 - 必须装 VS 的 "Game development with C++" workload
 
 ## 不在范围内
@@ -68,6 +70,7 @@ ue-plugin-bootstrap-skill/
 - macOS / Linux 上的 UE 开发(菜单和路径完全不同)
 - 蓝图项目(本 skill 强制 C++ 项目)
 - UE 4.x(API 差异较大,部分模板会编译失败)
+- UE 5.6+(发布后未测试,菜单可能有调整,使用时留意)
 - 把已存在的蓝图工程"升级"成 C++ 工程(场景太复杂,容易出错)
 
 ## License
