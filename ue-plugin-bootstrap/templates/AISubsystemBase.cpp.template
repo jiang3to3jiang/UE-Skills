@@ -1,0 +1,22 @@
+// 模板:AI 子系统基类 .cpp
+// 占位符:{{CLASS_NAME}}
+
+#include "{{CLASS_NAME}}.h"
+
+void U{{CLASS_NAME}}::Initialize(FSubsystemCollectionBase& Collection)
+{
+    Super::Initialize(Collection);
+    UE_LOG(LogTemp, Log, TEXT("[{{CLASS_NAME}}] Initialize"));
+}
+
+void U{{CLASS_NAME}}::Deinitialize()
+{
+    UE_LOG(LogTemp, Log, TEXT("[{{CLASS_NAME}}] Deinitialize"));
+    Super::Deinitialize();
+}
+
+void U{{CLASS_NAME}}::SayHello()
+{
+    TickCount++;
+    UE_LOG(LogTemp, Log, TEXT("[{{CLASS_NAME}}] SayHello called! TickCount=%d"), TickCount);
+}

@@ -1,0 +1,16 @@
+# 编辑器 / IDE
+.vscode/
+.idea/
+.vs/
+*.swp
+*.bak
+*.tmp
+
+# 操作系统
+Thumbs.db
+.DS_Store
+
+# 可能误存的本地路径或 token
+.env
+.env.local
+*.pem

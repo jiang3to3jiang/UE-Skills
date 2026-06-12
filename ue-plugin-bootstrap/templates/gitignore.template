@@ -1,0 +1,38 @@
+# UE 工程标准 .gitignore
+# 用于 UE 5.3 C++ 项目,放在工程根目录(包含 .uproject 文件的目录)
+
+# Visual Studio
+.vs/
+*.sln
+*.suo
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# UE 生成的构建产物
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+*.xcodeproj/
+*.xcworkspace/
+
+# 用户特定文件
+*.user
+
+# 日志和崩溃报告
+*.log
+Crashes/
+
+# 备份文件
+*.bak
+*.tmp
+
+# 操作系统
+Thumbs.db
+.DS_Store
+
+# 注意:
+# 不要忽略 Plugins/ 目录本身(插件源码要进版本)
+# 但插件内的 Binaries/Intermediate/ 仍然被上面的规则忽略

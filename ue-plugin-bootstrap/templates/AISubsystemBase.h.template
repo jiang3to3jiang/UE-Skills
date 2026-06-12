@@ -1,0 +1,34 @@
+// 模板:AI 子系统基类 .h
+// 占位符:
+//   {{CLASS_NAME}}    例如 HaneulAISubsystemBase
+//   {{MODULE_API}}    模块名大写 + _API,例如 MYAIPLUGIN_API
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "Subsystems/WorldSubsystem.h"
+#include "{{CLASS_NAME}}.generated.h"
+
+/**
+ * AI 子系统基类。
+ * 继承 UWorldSubsystem:每个 World(关卡)有一个实例,World 创建时自动 New,销毁时自动 Destroy。
+ * 蓝图里通过 Get World Subsystem 节点拿到。
+ */
+UCLASS(Blueprintable)
+class {{MODULE_API}} U{{CLASS_NAME}} : public UWorldSubsystem
+{
+    GENERATED_BODY()
+
+public:
+    /** 蓝图可调:打个招呼,验证子系统能从蓝图调到 */
+    UFUNCTION(BlueprintCallable, Category = "AI Subsystem")
+    void SayHello();
+
+    /** 蓝图可读写:验证 UPROPERTY 暴露 */
+    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "AI Subsystem")
+    int32 TickCount = 0;
+
+protected:
+    virtual void Initialize(FSubsystemCollectionBase& Collection) override;
+    virtual void Deinitialize() override;
+};
