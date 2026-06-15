@@ -15,8 +15,14 @@ void U{{CLASS_NAME}}::Deinitialize()
     Super::Deinitialize();
 }
 
-void U{{CLASS_NAME}}::SayHello()
+void U{{CLASS_NAME}}::DebugRefreshOnce()
 {
     TickCount++;
-    UE_LOG(LogTemp, Log, TEXT("[{{CLASS_NAME}}] SayHello called! TickCount=%d"), TickCount);
+    UE_LOG(LogTemp, Log, TEXT("[{{CLASS_NAME}}] DebugRefreshOnce called. TickCount=%d"), TickCount);
+    CE_Refresh();  // 触发蓝图事件
+}
+
+void U{{CLASS_NAME}}::SayHello()
+{
+    UE_LOG(LogTemp, Log, TEXT("[{{CLASS_NAME}}] Hello! TickCount=%d"), TickCount);
 }

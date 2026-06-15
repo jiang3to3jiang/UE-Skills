@@ -2,6 +2,12 @@
 // 占位符:
 //   {{CLASS_NAME}}    例如 HaneulAISubsystemBase
 //   {{MODULE_API}}    模块名大写 + _API,例如 MYAIPLUGIN_API
+//
+// 蓝图暴露约定(强制):
+//   1. 变量 C++ 用英文,显示用中文 -> meta = (DisplayName = "中文")
+//   2. 事件函数命名 CE_<英文>,显示用 CE_<中文>
+//   3. 能在 Sequencer K 的事件,加 CallInEditor -> 细节面板出按钮
+//   4. 每个 UPROPERTY/UFUNCTION 上方写 /** ... */ 注释 -> 自动当 tooltip
 
 #pragma once
 
@@ -20,13 +26,38 @@ class {{MODULE_API}} U{{CLASS_NAME}} : public UWorldSubsystem
     GENERATED_BODY()
 
 public:
-    /** 蓝图可调:打个招呼,验证子系统能从蓝图调到 */
-    UFUNCTION(BlueprintCallable, Category = "AI Subsystem")
-    void SayHello();
+    //=== 配置参数 ===
 
-    /** 蓝图可读写:验证 UPROPERTY 暴露 */
-    UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "AI Subsystem")
+    /** 每隔多少秒触发一次刷新事件(单位:秒)。可在细节面板调整。 */
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AI 子系统",
+              meta = (DisplayName = "刷新间隔"))
+    float RefreshInterval = 1.0f;
+
+    //=== 运行时状态(只读) ===
+
+    /** 当前 Tick 计数,用于调试观察子系统是否在运行 */
+    UPROPERTY(BlueprintReadOnly, Category = "AI 子系统",
+              meta = (DisplayName = "Tick 计数"))
     int32 TickCount = 0;
+
+    //=== 蓝图事件(纯蓝图实现,Sequencer 可 K) ===
+
+    /** 蓝图实现的刷新事件。Sequencer 里可作为 Event Track K 关键帧。 */
+    UFUNCTION(BlueprintImplementableEvent, Category = "AI 事件",
+              meta = (DisplayName = "CE_刷新"))
+    void CE_Refresh();
+
+    //=== 编辑器调试按钮(模拟时可点击触发) ===
+
+    /** 在细节面板点击此按钮,手动触发一次 CE_刷新 事件,用于编辑器调试。 */
+    UFUNCTION(BlueprintCallable, CallInEditor, Category = "AI 调试",
+              meta = (DisplayName = "测试刷新一次"))
+    void DebugRefreshOnce();
+
+    /** 蓝图可调:打招呼,验证子系统能从蓝图调到 */
+    UFUNCTION(BlueprintCallable, Category = "AI 调试",
+              meta = (DisplayName = "打招呼"))
+    void SayHello();
 
 protected:
     virtual void Initialize(FSubsystemCollectionBase& Collection) override;
